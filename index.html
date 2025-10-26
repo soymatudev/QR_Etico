@@ -4,21 +4,12 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Demo QR — ¿Qué comparte tu navegador?</title>
-  <style>
-    body { font-family: system-ui, Arial; padding: 1.2rem; max-width: 760px; margin: auto; color:#111; }
-    header { margin-bottom: 1rem; }
-    .card { border-radius: 10px; padding: 1rem; box-shadow: 0 6px 16px rgba(0,0,0,0.06); background:#fff; margin-bottom:1rem; }
-    button { padding: 0.6rem 1rem; border-radius:8px; border: none; cursor:pointer; font-weight:600; }
-    .primary { background:#1b6ef6; color:#fff; }
-    .danger { background:#e84a4a; color:#fff; }
-    pre { background:#f6f7fb; padding:0.6rem; border-radius:6px; overflow:auto; }
-    .small { font-size:0.9rem; color:#555; }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
     <h1>Demostración de datos que el navegador puede mostrar</h1>
-    <p class="small">Proyecto: Hacking ético (presentación). Esta página <strong>no</strong> almacena ni envía tus datos. Pide permiso y muestra solo información no sensible.</p>
+    <p class="small">Proyecto: Hacking ético. Esta página <strong>no</strong> almacena ni envía tus datos.</p>
   </header>
 
   <div class="card" id="intro">
@@ -26,7 +17,7 @@
     <p class="small">Pulsa <em>Mostrar info</em> y permite la ubicación si quieres ver el resultado. Si no permites, se mostrará la información del navegador sin coordenadas.</p>
     <p>
       <button id="btnStart" class="primary">Mostrar info</button>
-      <button id="btnExplain" style="margin-left:.6rem">Ver notas éticas</button>
+      <button id="btnExplain" class="secondary" style="margin-left:.6rem; display: none;">Ver notas éticas</button>
     </p>
   </div>
 
@@ -44,89 +35,11 @@
     <ul>
       <li>Pide permiso explícito. Si la persona no da permiso, no insistas.</li>
       <li>No almacenes ni compartas coordenadas ni userAgents sin consentimiento informado.</li>
-      <li>Hostea esta página en HTTPS (ej. GitHub Pages) para que la API de geolocalización funcione.</li>
       <li>Usa la demo solamente con fines educativos y con sujetos que sepan que participan en una demostración.</li>
     </ul>
-    <p class="small">Para la presentación: muestra la pantalla de consentimiento y luego el resultado en vivo para que los asistentes vean qué datos se muestran con permiso.</p>
     <p><button id="btnCloseEthic">Entendido</button></p>
   </div>
 
-  <script>
-    const btnStart = document.getElementById('btnStart');
-    const btnExplain = document.getElementById('btnExplain');
-    const output = document.getElementById('output');
-    const geoBlock = document.getElementById('geoBlock');
-    const infoBlock = document.getElementById('infoBlock');
-    const intro = document.getElementById('intro');
-    const ethic = document.getElementById('ethic');
-    const btnCloseEthic = document.getElementById('btnCloseEthic');
-    const btnReset = document.getElementById('btnReset');
-
-    btnExplain.addEventListener('click', ()=> {
-      ethic.style.display = 'block';
-      intro.style.display = 'none';
-    });
-    btnCloseEthic.addEventListener('click', ()=> {
-      ethic.style.display = 'none';
-      intro.style.display = 'block';
-    });
-
-    btnStart.addEventListener('click', async () => {
-      intro.style.display = 'none';
-      output.style.display = 'block';
-      geoBlock.innerHTML = '<p class="small">Solicitando permiso de ubicación...</p>';
-
-      // Mostrar info de navegador inmediatamente (no sensible)
-      const ua = navigator.userAgent || 'Desconocido';
-      const platform = navigator.platform || 'Desconocido';
-      const lang = navigator.language || 'Desconocido';
-      const width = screen.width, height = screen.height;
-      let connection = 'No disponible';
-      try {
-        if (navigator.connection && navigator.connection.effectiveType) {
-          connection = navigator.connection.effectiveType + (navigator.connection.downlink ? ' · downlink:' + navigator.connection.downlink + 'Mbps' : '');
-        }
-      } catch (e) {}
-
-      infoBlock.innerHTML = `
-        <pre>
-User Agent: ${ua}
-Platform: ${platform}
-Idioma: ${lang}
-Pantalla: ${width} × ${height} px
-Conexión (si disponible): ${connection}
-        </pre>
-      `;
-
-      // Solicitar geolocalización (solo si está disponible y la página se sirve en HTTPS)
-      if ('geolocation' in navigator) {
-        navigator.geolocation.getCurrentPosition(function(pos) {
-          const lat = pos.coords.latitude.toFixed(6);
-          const lon = pos.coords.longitude.toFixed(6);
-          const acc = pos.coords.accuracy ? pos.coords.accuracy + ' m' : 'Desconocida';
-          geoBlock.innerHTML = `
-            <h3>Coordenadas</h3>
-            <pre>Latitud: ${lat}\nLongitud: ${lon}\nPrecisión: ${acc}</pre>
-            <p class="small">Estas coordenadas se obtuvieron con tu permiso y <strong>no se envían a ningún servidor</strong>.</p>
-          `;
-        }, function(err) {
-          geoBlock.innerHTML = '<p class="small">No se pudo obtener la ubicación o el permiso fue denegado.</p>';
-        }, {
-          enableHighAccuracy: false,
-          maximumAge: 60_000,
-          timeout: 10_000
-        });
-      } else {
-        geoBlock.innerHTML = '<p class="small">API de geolocalización no disponible en este navegador.</p>';
-      }
-    });
-
-    btnReset.addEventListener('click', ()=> {
-      output.style.display = 'none';
-      intro.style.display = 'block';
-      geoBlock.innerHTML = '';
-      infoBlock.innerHTML = '';
-    });
-  </script>
+  <script src="./index.js"></script>
 </body>
 </html>
