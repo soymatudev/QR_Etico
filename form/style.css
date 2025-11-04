@@ -1,0 +1,90 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 1.5rem;
+    max-width: 800px;
+    margin: auto;
+    background-color: #1a1a2e; /* Fondo Oscuro Principal */
+    color: #f0f0f0; /* Texto Claro */
+    line-height: 1.6;
+  }
+  header {
+    margin-bottom: 2rem;
+    border-bottom: 2px solid #33334e;
+    padding-bottom: 1rem;
+  }
+  h1 {
+    font-size: 2.5rem;
+    color: #8c7ae6; /* Color de acento para el título principal */
+  }
+  h2 {
+    color: #8c7ae6;
+    border-left: 4px solid #8c7ae6;
+    padding-left: 0.5rem;
+  }
+  h3 {
+    color: #c9c9ff;
+  }
+  .card {
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    background: #2a2a4a; /* Fondo de tarjeta ligeramente más claro */
+    margin-bottom: 2rem;
+    border: 1px solid #3c3c69; /* Borde sutil */
+    transition: transform 0.2s;
+  }
+  .card:hover {
+      transform: translateY(-2px);
+  }
+  button {
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    transition: background-color 0.3s, box-shadow 0.3s;
+  }
+  .primary {
+    background: #8c7ae6; /* Morado/Azul para la acción principal */
+    color: #fff;
+  }
+  .primary:hover {
+    background-color: #7461cc;
+    box-shadow: 0 0 15px rgba(140, 122, 230, 0.6);
+  }
+  .danger {
+    background: #e84a4a;
+    color: #fff;
+  }
+  .danger:hover {
+    background-color: #cc3a3a;
+  }
+  .secondary { /* Nuevo estilo para el botón de notas */
+      background: #3c3c69;
+      color: #f0f0f0;
+  }
+  .secondary:hover {
+      background: #4a4a7d;
+  }
+  pre {
+    background: #11111f; /* Fondo muy oscuro para bloques de código */
+    padding: 1rem;
+    border-radius: 8px;
+    overflow: auto;
+    border: 1px dashed #5c5c8e;
+    white-space: pre-wrap; /* Mejor manejo de líneas largas */
+    word-wrap: break-word;
+    color: #7affb7; /* Color "hacker" para el texto */
+    font-size: 0.9rem;
+  }
+  .small {
+    font-size: 0.95rem;
+    color: #a0a0a0;
+  }
+  ul {
+      padding-left: 1.5rem;
+  }
+  li {
+      margin-bottom: 0.5rem;
+  }

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Document</title>
+  <script src="https://cdn.rawgit.com/serratus/quaggaJS/0420d5e0/dist/quagga.min.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Registro de Validación y Datos Generales</h1>
+    <p class="small">Sistema de validación de pertenencia a la UPEM (Demo Hacking Ético).</p>
+  </header>
+
+  <div class="card" id="form-registro">
+    <h2>1. Validación de Pertenencia (Credencial)</h2>
+    <p class="small">Por favor, sube una fotografía de la parte trasera de tu credencial universitaria, **enfocando el código de barras**.</p>
+    
+    <div id="validation-section">
+      <form id="credential-form">
+
+        <input type="button" id="btn" value="Start/Stop the scanner" />
+
+        <label for="credential-photo" style="display: block; margin-bottom: 0.5rem; color: #c9c9ff;">Subir Foto de Credencial:</label>
+        <input type="file" id="credential-photo" name="credential-photo" accept="image/*" required style="
+            display: block;
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1.5rem;
+            border: 2px dashed #5c5c8e;
+            border-radius: 8px;
+            background: #11111f;
+            color: #f0f0f0;
+        ">
+        <button type="submit" class="primary" id="btnValidate">Validar Código</button>
+        
+      </form>
+      
+      <div id="validation-result" style="margin-top: 1rem; display:none;">
+        <h3>Matrícula Obtenida:</h3>
+        <pre id="matricula-output">Buscando matrícula...</pre>
+        <p class="small">Nota: En un sistema real, el servidor escanearía el código de barras para obtener la matrícula. Aquí se simulará ese proceso.</p>
+        <button id="btnContinue" class="primary" style="margin-top: 1rem; display: none;">Continuar al Registro</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="form-datos" style="display:none;">
+    <h2>2. Registro de Datos Generales</h2>
+    <form id="data-form">
+      <div class="form-group">
+        <label for="nombre">Nombre Completo:</label>
+        <input type="text" id="nombre" name="nombre" required>
+      </div>
+      <div class="form-group">
+        <label for="correo">Correo Institucional:</label>
+        <input type="email" id="correo" name="correo" required>
+      </div>
+      <div class="form-group">
+        <label for="carrera">Carrera:</label>
+        <select id="carrera" name="carrera" required>
+          <option value="">Selecciona tu Carrera</option>
+          <option value="sistemas">Ingeniería en Sistemas</option>
+          <option value="industrial">Ingeniería Industrial</option>
+          <option value="gestion">Licenciatura en Gestión Empresarial</option>
+          </select>
+      </div>
+      
+      <button type="submit" class="primary" style="margin-top: 1.5rem;">Registrar Datos</button>
+    </form>
+  </div>
+
+  <div class="card" id="success-message" style="display:none;">
+    <h2>✅ ¡Registro Exitoso!</h2>
+    <p>Todos tus datos han sido registrados en la base de datos (demo). Gracias por participar.</p>
+    <button id="btnNew" class="secondary">Realizar Nuevo Registro</button>
+  </div>
+
+  <script src="./index.js"></script>
+  </body>
+</html>
